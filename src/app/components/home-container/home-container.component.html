@@ -1,0 +1,60 @@
+<div class="clr-main-container main-container">
+  <header class="header header-6 header-nav">
+    <div class="branding">
+      <a href="/" class="nav-link">
+        <cds-icon shape="vm-bug"></cds-icon>
+        <span class="title">Heirarchical Organisation Chart</span>
+      </a>
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button
+          class="nav-text"
+          clrDropdownTrigger
+          aria-label="open user profile"
+        >
+          Aditya Bharadwaj
+        </button>
+      </clr-dropdown>
+    </div>
+  </header>
+
+  <nav class="subnav">
+    <div class="btn-group">
+      <div
+        class="radio btn nav-item"
+        routerLink="/GraphView"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+      >
+        <input type="radio" name="btn-group-radios" id="btn-graph-view" />
+        <label for="btn-graph-view">
+          <cds-icon for="btn-graph-view" shape="home"></cds-icon>
+          Graph View
+        </label>
+      </div>
+      <div
+        class="radio btn nav-item"
+        routerLink="/GridView"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+      >
+        <input type="radio" name="btn-group-radios" id="btn-grid-view" />
+        <label for="btn-grid-view">
+          <cds-icon
+            for="btn-grid-view"
+            shape="grid-view"
+            solid="true"
+          ></cds-icon>
+          Grid View
+        </label>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
