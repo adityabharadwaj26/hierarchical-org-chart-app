@@ -15,7 +15,7 @@ import { Employee } from 'src/app/state/employee.model';
   templateUrl: './change-reporting-modal.component.html',
   styleUrls: ['./change-reporting-modal.component.scss'],
 })
-export class ChangeReportingModalComponent implements OnInit{
+export class ChangeReportingModalComponent implements OnInit {
   @Input() opened: boolean = false;
   @Input() employeeData: Employee | undefined;
   @Input() managers: any[] = [];
@@ -26,36 +26,27 @@ export class ChangeReportingModalComponent implements OnInit{
 
   constructor() {
     this.changeEmployeeForm = new FormGroup({
-      name: new FormControl({value: this.employeeData?.name, disabled : true}, Validators.required),
+      name: new FormControl(
+        { value: this.employeeData?.name, disabled: true },
+        Validators.required
+      ),
       manager: new FormControl('', Validators.required),
     });
   }
 
   ngOnInit() {
-    console.log(this.employeeData);
-    console.log(this.managers);
-    this.changeEmployeeForm.patchValue({name: this.employeeData?.name});
-  }
-
-  ngAfterViewInit() {
-    console.log(this.employeeData);
-    console.log(this.managers);
-    this.changeEmployeeForm.patchValue({name: this.employeeData?.name});
+    this.changeEmployeeForm.patchValue({ name: this.employeeData?.name });
   }
 
   cancelModal() {
-    console.log('Cancel Modal');
     this.opened = false;
     this.changeEmployeeForm.reset();
     this.closedEvent.emit('cancelModal');
   }
   saveModal(form: FormGroup) {
-    console.log(form.value);
-    console.log(this.employeeData);
-    console.log(this.managers);
-    let newEmployee = form.value;
-    newEmployee.manager = this.employeeData?.name;
-    this.closedEvent.emit(newEmployee);
+    let newManager = form.value.manager;
+    let employee = { ...this.employeeData, manager: newManager };
+    this.closedEvent.emit(employee);
     this.opened = false;
   }
 }

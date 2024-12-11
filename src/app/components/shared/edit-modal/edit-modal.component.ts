@@ -52,17 +52,16 @@ export class EditModalComponent {
   ];
 
   ngOnInit() {
-    this.addEmployeeForm.patchValue({...this.employeeData})
+    this.addEmployeeForm.patchValue({ ...this.employeeData });
   }
 
   cancelModal() {
-    console.log('Cancel Modal');
     this.opened = false;
     this.addEmployeeForm.reset();
     this.closedEvent.emit('cancelModal');
   }
+
   saveModal(form: FormGroup) {
-    console.log(form.value);
     let newEmployee = form.value;
     newEmployee.manager = this.employeeData?.name;
     this.closedEvent.emit(newEmployee);

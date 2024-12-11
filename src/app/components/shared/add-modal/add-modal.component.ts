@@ -24,7 +24,10 @@ export class AddModalComponent {
 
   constructor() {
     this.addEmployeeForm = new FormGroup({
-      manager: new FormControl({value: this.employeeData?.manager, disabled: true}, Validators.required),
+      manager: new FormControl(
+        { value: this.employeeData?.manager, disabled: true },
+        Validators.required
+      ),
       name: new FormControl('', Validators.required),
       designation: new FormControl(null, Validators.required),
       email: new FormControl(
@@ -42,18 +45,14 @@ export class AddModalComponent {
     'Manager',
   ];
 
-  ngOnInit() {
-   
-  }
+  ngOnInit() {}
 
   cancelModal() {
-    console.log('Cancel Modal');
     this.opened = false;
     this.addEmployeeForm.reset();
     this.closedEvent.emit('cancelModal');
   }
   saveModal(form: FormGroup) {
-    console.log(form.value);
     let newEmployee = form.value;
     newEmployee.manager = this.employeeData?.name;
     this.closedEvent.emit(newEmployee);

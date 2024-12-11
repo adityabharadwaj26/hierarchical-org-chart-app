@@ -38,7 +38,6 @@ export class TableDataComponent {
   employeeEvent(obj: { action: any; user: Employee; index: number }) {
     switch (obj.action) {
       case 'add':
-        console.log(this.addModalOpened);
         this.addModalOpened = true;
         this.employeeData = obj.user;
         break;
@@ -54,13 +53,14 @@ export class TableDataComponent {
         this.changeModalOpened = true;
         this.employeeData = obj.user;
         let set = new Set(this.employees.map((e) => e.name));
-        this.managersList = Array.from(set).filter((n) => n);
+        this.managersList = Array.from(set).filter(
+          (n) => n && n !== obj.user.name
+        );
         break;
     }
   }
 
   closedAddModalEvent(event: any) {
-    console.log(event);
     if (event === 'cancelModal') {
       this.addModalOpened = false;
     } else {
@@ -108,14 +108,12 @@ export class TableDataComponent {
     }
   }
   closedEditModalEvent(event: any) {
-    console.log(event);
     if (event === 'cancelModal') {
       this.editModalOpened = false;
     } else {
       this.editModalOpened = false;
       let arr = [...this.employees];
       let index = arr.findIndex((employee) => employee.name == event.name);
-      console.log(index);
       if (index !== -1) {
         arr[index] = { ...arr[index], ...event };
       }
