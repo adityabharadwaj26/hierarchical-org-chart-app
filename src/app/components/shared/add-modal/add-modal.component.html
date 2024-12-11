@@ -1,0 +1,56 @@
+<clr-modal #modal [(clrModalOpen)]="opened" [clrModalSize]="size">
+  <div class="modal-title">Add Employee</div>
+  <div class="modal-body">
+    <form clrForm [formGroup]="addEmployeeForm">
+      <clr-input-container>
+        <label>Manager Name</label>
+        <input clrInput type="text" formControlName="manager" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>Employee Name</label>
+        <input clrInput type="text" formControlName="name" />
+        <clr-control-helper>Enter Employee Name</clr-control-helper>
+        <clr-control-error>Name is Required</clr-control-error>
+      </clr-input-container>
+      <clr-select-container>
+        <label class="clr-required-mark">Select</label>
+        <select clrSelect name="options" formControlName="designation" required>
+          <option *ngFor="let d of designations" [ngValue]="d">{{ d }}</option>
+        </select>
+        <clr-control-helper>Select Employee Designation</clr-control-helper>
+        <clr-control-error>Designation is Required</clr-control-error>
+      </clr-select-container>
+      <!-- <clr-input-container>
+        <label>Designation </label>
+        <select id="designation" formControlName="designation">
+          <option *ngFor="let d of designations" [ngValue]="d">{{ d }}</option>
+        </select>
+        
+      </clr-input-container> -->
+      <clr-input-container>
+        <label>Email ID</label>
+        <input clrInput type="text" formControlName="email" />
+        <clr-control-helper>Enter Email Id</clr-control-helper>
+        <clr-control-error>Email Id is Required</clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Phone Number</label>
+        <input clrInput type="text" formControlName="phone" />
+        <clr-control-helper>Enter Phone Number</clr-control-helper>
+        <clr-control-error>Phone Number is Required</clr-control-error>
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="cancelModal()">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="saveModal(addEmployeeForm)"
+    >
+      Ok
+    </button>
+  </div>
+</clr-modal>

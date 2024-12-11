@@ -11,7 +11,7 @@ export class TableViewComponent {
   @Input() users: Employee[] = [];
   @Output() employeeEvent = new EventEmitter<any>();
  
-  employeeAction(action: any, index: any) {
-    this.employeeEvent.emit({action, index});
+  employeeAction(action: any, user:Employee, index: any) {
+    this.employeeEvent.emit({action,  user, index});
   }
 }

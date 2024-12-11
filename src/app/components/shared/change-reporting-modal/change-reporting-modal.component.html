@@ -1,0 +1,31 @@
+<clr-modal #modal [(clrModalOpen)]="opened" [clrModalSize]="size">
+  <div class="modal-title">Add Employee modal</div>
+  <div class="modal-body">
+    <form clrForm [formGroup]="changeEmployeeForm">
+      <clr-input-container>
+        <label>Employee Name</label>
+        <input clrInput type="text" formControlName="name"/>
+      </clr-input-container>
+      <clr-select-container>
+        <label class="clr-required-mark">Manager Name </label>
+        <select clrSelect name="options" formControlName="manager" required>
+          <option *ngFor="let m of managers" [ngValue]="m">{{ m }}</option>
+        </select>
+        <clr-control-helper>Select New Manager Name</clr-control-helper>
+        <clr-control-error>Manager is Required</clr-control-error>
+      </clr-select-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="cancelModal()">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="saveModal(changeEmployeeForm)"
+    >
+      Ok
+    </button>
+  </div>
+</clr-modal>

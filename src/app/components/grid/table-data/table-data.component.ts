@@ -1,5 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ClrModal } from '@clr/angular';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import {
+  addEmployee,
+  deleteEmployee,
+  editEmployee,
+} from 'src/app/state/employee.actions';
 import { Employee } from 'src/app/state/employee.model';
+import { EmployeeState } from 'src/app/state/employee.reducer';
+import { selectAllEmployees } from 'src/app/state/employee.selectors';
 
 @Component({
   selector: 'app-table-data',
@@ -7,47 +17,109 @@ import { Employee } from 'src/app/state/employee.model';
   styleUrls: ['./table-data.component.scss'],
 })
 export class TableDataComponent {
-  users: Employee[] = [
-    {
-      id: '1',
-      name: 'Aditya Bharadwaj',
-      designation: 'Associate Specialist',
-      email: 'adityabharadwaj26@gmail.com',
-      phone: '8962819052',
-      manager: '',
-    },
-    {
-      id: '2',
-      name: 'Amol Shinde',
-      designation: 'Associate Specialist',
-      email: 'adityabharadwaj26@gmail.com',
-      phone: '8962819052',
-      manager: 'Aditya Bharadwaj',
-    },
-    {
-      id: '3',
-      name: 'Aditya Kalge',
-      designation: 'Associate Specialist',
-      email: 'adityabharadwaj26@gmail.com',
-      phone: '8962819052',
-      manager: 'Aditya Bharadwaj',
-    },
-  ];
+  employees: Employee[] = [];
+  modalOpened: boolean = false;
+  employeeData: Employee | undefined;
+  addModalOpened: boolean = false;
+  deleteModalOpened: boolean = false;
+  changeModalOpened: boolean = false;
+  editModalOpened: boolean = false;
+  managersList: string[] = [];
 
-  employeeEvent(obj: { action: any; index: number }) {
+  constructor(private store: Store<EmployeeState>) {
+    this.store.select(selectAllEmployees).subscribe((employees) => {
+      console.log(employees);
+      this.employees = employees;
+    });
+  }
+
+  ngOnInit() {}
+
+  employeeEvent(obj: { action: any; user: Employee; index: number }) {
     switch (obj.action) {
       case 'add':
-        console.log(obj.action, obj.index);
+        console.log(this.addModalOpened);
+        this.addModalOpened = true;
+        this.employeeData = obj.user;
         break;
       case 'edit':
-        console.log(obj.action, obj.index);
+        this.editModalOpened = true;
+        this.employeeData = obj.user;
         break;
       case 'delete':
-        console.log(obj.action, obj.index);
+        this.deleteModalOpened = true;
+        this.employeeData = obj.user;
         break;
       case 'change':
-        console.log(obj.action, obj.index);
+        this.changeModalOpened = true;
+        this.employeeData = obj.user;
+        let set = new Set(this.employees.map((e) => e.name));
+        this.managersList = Array.from(set).filter((n) => n);
         break;
+    }
+  }
+
+  closedAddModalEvent(event: any) {
+    console.log(event);
+    if (event === 'cancelModal') {
+      this.addModalOpened = false;
+    } else {
+      this.addModalOpened = false;
+      let newEmployee = event;
+      event.id = this.employees.length + 1;
+      let arr = [...this.employees, newEmployee];
+      // this.employees.push(event);
+      this.store.dispatch(addEmployee({ employees: arr }));
+    }
+  }
+
+  closedDeleteModalEvent(event: any) {
+    if (event === 'cancelModal') {
+      this.deleteModalOpened = false;
+    } else {
+      this.deleteModalOpened = false;
+      let arr = [...this.employees];
+      const newArr: Employee[] = arr.map((e) => {
+        let newObject = e;
+        if (e.manager === event.name) {
+          newObject = { ...e, manager: event.manager };
+        }
+        return newObject;
+      });
+      let index = newArr.findIndex((employee) => employee.id == event.id);
+      if (index !== -1) {
+        newArr.splice(index, 1);
+      }
+      this.store.dispatch(deleteEmployee({ employees: newArr }));
+    }
+  }
+
+  closedChangeModalEvent(event: any) {
+    if (event === 'cancelModal') {
+      this.changeModalOpened = false;
+    } else {
+      this.changeModalOpened = false;
+      let arr = [...this.employees];
+      let index = arr.findIndex((employee) => employee.name == event.name);
+      if (index !== -1) {
+        arr[index] = { ...arr[index], ...event };
+      }
+      this.store.dispatch(editEmployee({ employees: arr }));
+    }
+  }
+  closedEditModalEvent(event: any) {
+    console.log(event);
+    if (event === 'cancelModal') {
+      this.editModalOpened = false;
+    } else {
+      this.editModalOpened = false;
+      let arr = [...this.employees];
+      let index = arr.findIndex((employee) => employee.name == event.name);
+      console.log(index);
+      if (index !== -1) {
+        arr[index] = { ...arr[index], ...event };
+      }
+      this.store.dispatch(editEmployee({ employees: arr }));
     }
   }
 }

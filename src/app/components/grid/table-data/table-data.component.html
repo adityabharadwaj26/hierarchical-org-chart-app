@@ -1,4 +1,33 @@
 <app-table-view
-  [users]="users"
+  [users]="employees"
   (employeeEvent)="employeeEvent($event)"
 ></app-table-view>
+<ng-container *ngIf="addModalOpened">
+  <app-add-modal
+    [opened]="addModalOpened"
+    [employeeData]="employeeData"
+    (closedEvent)="closedAddModalEvent($event)"
+  ></app-add-modal>
+</ng-container>
+<ng-container *ngIf="deleteModalOpened">
+  <app-delete-modal
+    [opened]="deleteModalOpened"
+    [employeeData]="employeeData"
+    (closedEvent)="closedDeleteModalEvent($event)"
+  ></app-delete-modal>
+</ng-container>
+<ng-container *ngIf="changeModalOpened">
+  <app-change-reporting-modal
+    [opened]="changeModalOpened"
+    [employeeData]="employeeData"
+    [managers]="managersList"
+    (closedEvent)="closedChangeModalEvent($event)"
+  ></app-change-reporting-modal>
+</ng-container>
+<ng-container *ngIf="editModalOpened">
+  <app-edit-modal
+    [opened]="editModalOpened"
+    [employeeData]="employeeData"
+    (closedEvent)="closedEditModalEvent($event)"
+  ></app-edit-modal>
+</ng-container>

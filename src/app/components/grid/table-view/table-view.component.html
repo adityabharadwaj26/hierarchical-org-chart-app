@@ -12,16 +12,16 @@
       [clrDgItem]="user"
     >
       <clr-dg-action-overflow>
-        <button class="action-item" (click)="employeeAction('add', index)">
+        <button class="action-item" (click)="employeeAction('add', user, index)">
           Add Reportee
         </button>
-        <button class="action-item" (click)="employeeAction('edit', index)">
+        <button class="action-item" (click)="employeeAction('edit', user, index)">
           Edit Details
         </button>
-        <button class="action-item" (click)="employeeAction('delete', index)">
+        <button class="action-item" (click)="employeeAction('delete', user, index)">
           Delete Employee
         </button>
-        <button class="action-item" (click)="employeeAction('change', index)">
+        <button class="action-item" (click)="employeeAction('change', user, index)">
           Change Reporting Line
         </button>
       </clr-dg-action-overflow>

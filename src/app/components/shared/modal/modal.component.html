@@ -1,0 +1,21 @@
+<clr-modal
+  #modal
+  [(clrModalOpen)]="opened"
+  [clrModalSize]="size"
+  [clrModalClosable]="false"
+>
+  <div class="modal-title">modal</div>
+  <div class="modal-body">
+    <ng-container *ngIf="1==1">
+        <app-add-modal></app-add-modal>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="cancelModal()">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-primary" (click)="saveModal()">
+      Ok
+    </button>
+  </div>
+</clr-modal>
