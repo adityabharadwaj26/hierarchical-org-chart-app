@@ -1,0 +1,38 @@
+div {
+    width: 100%;
+    height: 600px;
+  }
+
+  .gear-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s ease;
+  }
+  
+  .gear-button:hover {
+    color: #333;
+  }
+  
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    padding: 16px;
+  }
+  
+  .card-actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+  
+  .card-content {
+    margin-bottom: 8px;
+  }
