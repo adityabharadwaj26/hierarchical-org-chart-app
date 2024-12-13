@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { ClarityModule } from '@clr/angular';
+import { ClarityModule, ClrDropdownModule } from '@clr/angular';
 import { HomeContainerComponent } from './components/home-container/home-container.component';
 import { GridModule } from './components/grid/grid.module';
 import { GraphModule } from './components/graph/graph.module';
@@ -28,6 +28,7 @@ import { EmployeeEffects } from './state/employee.effects';
     GridModule,
     GraphModule,
     EffectsModule.forRoot([EmployeeEffects]),
+    ClrDropdownModule 
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -28,7 +28,6 @@ export class TableDataComponent {
 
   constructor(private store: Store<EmployeeState>) {
     this.store.select(selectAllEmployees).subscribe((employees) => {
-      console.log(employees);
       this.employees = employees;
     });
   }

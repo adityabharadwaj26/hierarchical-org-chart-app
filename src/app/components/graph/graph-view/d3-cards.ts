@@ -43,39 +43,67 @@ export class D3Cards {
       .text((d: any) => d.data.data.designation)
       .style('margin', '0');
 
-      nodes
+    nodes
       .append('button')
-      .attr('class', 'gear-button')
+      .attr('class', 'btn btn-icon')
       .style('position', 'absolute')
-      .style('top', '8px')
+      .style('top', '0px')
       .style('right', '0px')
       .style('background', 'none')
       .style('border', 'none')
       .style('cursor', 'pointer')
       .html(
         `
-        <div class="btn-group btn-icon">
-          <div class="btn-group-overflow">
-            <button class="btn dropdown-toggle" aria-label="Options">
-              <cds-icon shape="cog"></cds-icon>
-            </button>
-            <div class="dropdown-menu" role="menu" style="display: none;">
-              <button class="btn" role="menuitem">Download</button>
-              <button class="btn" role="menuitem">Delete</button>
-            </div>
-          </div>
-        </div>
+        <cds-icon shape="cog"></cds-icon>
         `
       )
       .on('click', function (event, d: any) {
-        // Toggle the dropdown menu
-        const dropdownMenu = d3.select(this).select('.dropdown-menu');
-        console.log(dropdownMenu.style);
-        const isOpen = dropdownMenu.style('display') === 'block';
-        dropdownMenu.style('display', isOpen ? 'none' : 'block');
+        console.log(d);
       });
 
-    nodes.style('z-index', 10);
+    // nodes
+    // .append('clr-dropdown')
+    // .attr('class', 'dropdown bottom-left')
+    // .style('position', 'absolute')
+    // .style('top', '8px')
+    // .style('right', '0px')
+    // .style('background', 'none')
+    // .style('border', 'none')
+    // .style('cursor', 'pointer')
+    // .html(
+    //   `
+    //  <button class="btn btn-outline-primary" clrDropdownTrigger>
+    //     Dropdown
+    //     <cds-icon shape="angle" direction="down"></cds-icon>
+    //   </button>
+    //   <clr-dropdown-menu clrPosition="bottom-left">
+    //     <label class="dropdown-header" aria-hidden="true">Dropdown header</label>
+    //     <div aria-label="Dropdown header Action 1" clrDropdownItem>Action 1</div>
+    //     <div aria-label="Dropdown header Disabled Action" [clrDisabled]="true" clrDropdownItem>
+    //       Disabled Action
+    //     </div>
+    //     <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+    //     <clr-dropdown>
+    //       <button clrDropdownTrigger>Link 1</button>
+    //       <clr-dropdown-menu>
+    //         <button clrDropdownItem>Foo</button>
+    //         <clr-dropdown>
+    //           <button clrDropdownTrigger>Bar</button>
+    //           <clr-dropdown-menu clrPosition="left-top">
+    //             <button clrDropdownItem>Baz</button>
+    //           </clr-dropdown-menu>
+    //         </clr-dropdown>
+    //       </clr-dropdown-menu>
+    //     </clr-dropdown>
+    //     <div clrDropdownItem>Link 2</div>
+    //   </clr-dropdown-menu>
+    //   `
+    // )
+    // .on('click', function (event, d: any) {
+    //  console.log(d);
+    // });
+
+    nodes.style('z-index', 1);
 
     // Add interactivity
     nodes
@@ -89,9 +117,13 @@ export class D3Cards {
           .style('background-color', '#f9f9f9')
           .style('box-shadow', '0px 4px 6px rgba(0, 0, 0, 0.1)');
       });
-    //   .on('click', function (event, d: any) {
-    //     alert(`You clicked on: ${d.data.name}, ${event}`);
-    //   });
+    // .on('click', function (event, d: any) {
+    //   const dropdownMenu = d3.select(this).select('.dropdown-menu');
+    //   const isOpen = dropdownMenu.style('display') === 'block';
+    //   console.log(isOpen);
+    //   dropdownMenu.style('display', isOpen ? 'none' : 'block');
+    // console.log(event, d);
+    // });
 
     // Draw links
     const links = container

@@ -7,6 +7,7 @@ import { AddModalComponent } from './add-modal/add-modal.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 
 
@@ -17,6 +18,7 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
     AddModalComponent,
     DeleteModalComponent,
     EditModalComponent,
+    DropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
     AddModalComponent,
     ChangeReportingModalComponent,
     DeleteModalComponent,
-    EditModalComponent
+    EditModalComponent,
+    DropdownComponent
   ]
 })
 export class SharedModule { }

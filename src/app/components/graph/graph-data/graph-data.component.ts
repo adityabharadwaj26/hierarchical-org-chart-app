@@ -15,7 +15,6 @@ export class GraphDataComponent {
 
   constructor(private store: Store<EmployeeState>) {
     this.store.select(selectAllEmployees).subscribe((employees) => {
-      console.log(employees);
       this.employees = employees;
     });
   }
@@ -30,7 +29,8 @@ export class GraphDataComponent {
         return d.manager;
       })(this.employees);
 
-    console.log(root  );
     this.tree = root;
   }
+
+  
 }
