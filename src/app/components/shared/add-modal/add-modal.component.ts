@@ -34,7 +34,7 @@ export class AddModalComponent {
         '',
         Validators.compose([Validators.required, Validators.email])
       ),
-      phone: new FormControl('', Validators.required),
+      phone: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(10), Validators.minLength(10)])),
     });
   }
 
@@ -45,7 +45,9 @@ export class AddModalComponent {
     'Manager',
   ];
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.addEmployeeForm.patchValue({manager: this.employeeData?.manager})
+  }
 
   cancelModal() {
     this.opened = false;
